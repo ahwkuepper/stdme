@@ -9,9 +9,9 @@ import pickle
 
 df_merged = pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/chlamydia_cdc_census.csv")
 df_zipfips= pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/ZIP_COUNTY_122014.csv", usecols={0,1})
+df_zipcode = pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/census_zipcode.csv")
 zip2fips = dict(zip(df_zipfips["ZIP"], df_zipfips["COUNTY"]))
 model = pickle.load(open("/Users/akuepper/Desktop/Insight/project/data/randomforest_params.pickle", "rb"))
-
 
 gender_rate = {}
 gender_factor = {}
@@ -51,13 +51,54 @@ race_factor["Multiple"] = race_rate["Multiple"]/rate_average
 race_factor["Pacific"] = race_rate["Pacific"]/rate_average
 race_factor["White"] = race_rate["White"]/rate_average
 
+age_rate = {}
+age_factor = {}
+age_number = {}
+age_number["0-14"] = 61089123.0
+age_number["15-19"] = 21158964.0
+age_number["20-24"] = 22795438.0
+age_number["25-29"] = 21580198.0
+age_number["30-34"] = 21264389.0
+age_number["35-39"] = 19603770.0
+age_number["40-44"] = 20848920.0
+age_number["45-54"] = 43767532.0
+age_number["55-64"] = 39316431.0
+age_number["65+"] = 44704074.0
 
-def calculate_rate(Zipcode, Race, Gender):
-    fips = zip2fips[int(Zipcode)]
-    target = df_merged[df_merged['FIPS']==fips]
+age_rate["0-14"] = 20.0e-5
+age_rate["15-19"] = 1804.0e-5
+age_rate["20-24"] = 2484.6e-5
+age_rate["25-29"] = 1176.2e-5
+age_rate["30-34"] = 532.4e-5
+age_rate["35-39"] = 268.0e-5
+age_rate["40-44"] = 131.5e-5
+age_rate["45-54"] = 56.6e-5
+age_rate["55-64"] = 16.6e-5
+age_rate["65+"] = 3.2e-5
+
+US_age_number = age_number["0-14"] + age_number["15-19"] + age_number["20-24"] + age_number["25-29"] + age_number["30-34"] + age_number["35-39"] + age_number["40-44"] + age_number["45-54"] + age_number["55-64"] + age_number["65+"]
+rate_average = (age_rate["0-14"]*age_number["0-14"]+age_rate["15-19"]*age_number["15-19"]+age_rate["20-24"]*age_number["20-24"]+age_rate["25-29"]*age_number["25-29"]+age_rate["30-34"]*age_number["30-34"]+age_rate["35-39"]*age_number["35-39"]+age_rate["40-44"]*age_number["40-44"]+age_rate["45-54"]*age_number["45-54"]+age_rate["55-64"]*age_number["55-64"]+age_rate["65+"]*age_number["65+"])/US_age_number  
+age_factor["0-14"] = age_rate["0-14"]/rate_average
+age_factor["15-19"] = age_rate["15-19"]/rate_average
+age_factor["20-24"] = age_rate["20-24"]/rate_average
+age_factor["25-29"] = age_rate["30-34"]/rate_average
+age_factor["30-34"] = age_rate["30-34"]/rate_average
+age_factor["35-39"] = age_rate["35-39"]/rate_average
+age_factor["40-44"] = age_rate["40-44"]/rate_average
+age_factor["45-54"] = age_rate["45-54"]/rate_average
+age_factor["55-64"] = age_rate["55-64"]/rate_average
+age_factor["65+"] = age_rate["65+"]/rate_average
+
+
+
+def calculate_rate(Zipcode):
+    target = df_zipcode[df_zipcode["geoid2"]==int(Zipcode)]
+
+#    fips = zip2fips[int(Zipcode)]
+#    target = df_merged[df_merged['FIPS']==fips]
     target_params = target.values[0]
-    chlamydia_rate = model.predict(target_params[-35:])
-    return chlamydia_rate*gender_factor[Gender]*race_factor[Race]
+    chlamydia_rate = model.predict(target_params[2:])
+    return chlamydia_rate*100
 
 
 
@@ -103,10 +144,8 @@ def stdme_input():
 @app.route('/output')
 def stdme_output():
 
-
-
-
   #pull information from input fields and store it
+  age = request.args.get('age')
   gender = request.args.get('gender')
   ethnicity = request.args.get('ethnicity')
   zipcode = request.args.get('zipcode')
@@ -119,6 +158,7 @@ def stdme_output():
 #  births = []
 #  for i in range(0,query_results.shape[0]):
 #      births.append(dict(index=query_results.iloc[i]['index'], attendant=query_results.iloc[i]['attendant'], birth_month=query_results.iloc[i]['birth_month']))
-  the_result = calculate_rate(zipcode, ethnicity, gender)*100
-  return render_template("output.html", the_result = np.round(the_result[0],decimals=2))
+  local_rate = calculate_rate(zipcode)
+  rate = local_rate*gender_factor[gender]*race_factor[ethnicity]*age_factor[age]  
+  return render_template("output.html", the_result = np.round(rate[0],decimals=2), average = np.round(local_rate[0],decimals=2))
 

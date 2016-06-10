@@ -4,3 +4,4 @@ graphics
 .ipynb_checkpoints
 .DS_Store
 *xlsx
+*.pyc
