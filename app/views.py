@@ -97,7 +97,7 @@ def calculate_rate(Zipcode):
 #    fips = zip2fips[int(Zipcode)]
 #    target = df_merged[df_merged['FIPS']==fips]
     target_params = target.values[0]
-    chlamydia_rate = model.predict(target_params[2:])
+    chlamydia_rate = model.predict(target_params[1:])
     return chlamydia_rate*100
 
 

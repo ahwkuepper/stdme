@@ -1,0 +1,15 @@
+HydePark, 625, 125
+WestRoxbury, 125, 125
+Roslindale, 375, 125
+Mattapan, 1125, 125
+JamaicaPlain, 375, 125
+SouthDorchester, 875, 125
+NorthDorchester, 1125, 125
+Roxbury, 875, 125
+Fenway, 375, 125
+SouthEnd, 625, 125
+SouthBoston, 375, 125
+BackBay, 375, 125
+Charlestown, 375, 125
+Allston, 375, 125
+EastBoston, 625, 125
