@@ -5,3 +5,4 @@ graphics
 .DS_Store
 *xlsx
 *.pyc
+*.pem

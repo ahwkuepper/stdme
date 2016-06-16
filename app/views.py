@@ -7,11 +7,12 @@ import psycopg2
 import numpy as np
 import pickle
 
-df_merged = pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/chlamydia_cdc_census.csv")
-df_zipfips= pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/ZIP_COUNTY_122014.csv", usecols={0,1})
 df_zipcode = pd.read_csv("/Users/akuepper/Desktop/Insight/project/data/census_zipcode.csv")
-zip2fips = dict(zip(df_zipfips["ZIP"], df_zipfips["COUNTY"]))
 model = pickle.load(open("/Users/akuepper/Desktop/Insight/project/data/randomforest_params.pickle", "rb"))
+Ymean = pickle.load(open('/Users/akuepper/Desktop/Insight/project/data/Ymean.pickle', "rb"))
+Ystd = pickle.load(open('/Users/akuepper/Desktop/Insight/project/data/Ystd.pickle', "rb"))
+
+df_sites = pd.read_csv('/Users/akuepper/Desktop/Insight/project/data/testingsites.csv')
 
 gender_rate = {}
 gender_factor = {}
@@ -90,24 +91,33 @@ age_factor["55-64"] = age_rate["55-64"]/rate_average
 age_factor["65+"] = age_rate["65+"]/rate_average
 
 
+def lookup_std_testing_site(Zipcode):
+    clinic = df_sites[df_sites["zipcode"]==int(Zipcode)].name.str.lstrip().str.rstrip().values
+    if len(clinic):
+        words = clinic[0].split()
+    else:
+        words = "free STD testing near"
+        words = words.split()
+    for word in np.arange(len(words)):
+        if word == 0:
+            sentence = words[0]
+        else:
+            sentence = sentence + "+" + words[word]
+    return sentence
+
 
 def calculate_rate(Zipcode):
     target = df_zipcode[df_zipcode["geoid2"]==int(Zipcode)]
-
-#    fips = zip2fips[int(Zipcode)]
-#    target = df_merged[df_merged['FIPS']==fips]
     target_params = target.values[0]
-    chlamydia_rate = model.predict(target_params[1:])
+    chlamydia_rate = model.predict(target_params[1:])*Ystd+Ymean
     return chlamydia_rate*100
-
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html",
-       title = 'Home', user = { 'nickname': 'Miguel' },
-       )
+    return render_template("index.html")
+
 
 @app.route('/db')
 def birth_page():
@@ -136,29 +146,42 @@ def cesareans_page_fancy():
     return render_template('cesareans.html',births=births)
 
 
-@app.route('/input')
-def stdme_input():
-    return render_template("input.html")
-
-
 @app.route('/output')
 def stdme_output():
 
   #pull information from input fields and store it
   age = request.args.get('age')
-  gender = request.args.get('gender')
-  ethnicity = request.args.get('ethnicity')
   zipcode = request.args.get('zipcode')
+  gender = request.args.get('gender_select')
+  ethnicity = request.args.get('ethnicity_select')
+  
+  if int(age) > 64:
+    age = "65+"
+  elif int(age) > 54:
+    age = "55-64"
+  elif int(age) > 44:
+    age = "45-54"
+  elif int(age) > 39:
+    age = "40-44"
+  elif int(age) > 34:
+    age = "35-39"
+  elif int(age) > 29:
+    age = "30-34"
+  elif int(age) > 24:
+    age = "25-29"
+  elif int(age) > 19:
+    age = "20-24"
+  elif int(age) > 14:
+    age = "15-19"
+  else:
+    age = "0-14"
 
-#  #just select the Cesareans  from the birth dtabase for the month that the user inputs
-#  query = "SELECT index, attendant, birth_month FROM birth_data_table WHERE delivery_method='Cesarean' AND birth_month='%s'" % patient
-#  print(query)
-#  query_results=pd.read_sql_query(query,con)
-#  print(query_results)
-#  births = []
-#  for i in range(0,query_results.shape[0]):
-#      births.append(dict(index=query_results.iloc[i]['index'], attendant=query_results.iloc[i]['attendant'], birth_month=query_results.iloc[i]['birth_month']))
+  print(ethnicity)
+
   local_rate = calculate_rate(zipcode)
   rate = local_rate*gender_factor[gender]*race_factor[ethnicity]*age_factor[age]  
-  return render_template("output.html", the_result = np.round(rate[0],decimals=2), average = np.round(local_rate[0],decimals=2))
+
+  sentence = lookup_std_testing_site(zipcode)
+
+  return render_template("output.html", the_result = np.round(rate[0],decimals=2), average = np.round(local_rate[0],decimals=2), zipcode = zipcode, sentence = sentence)
 
