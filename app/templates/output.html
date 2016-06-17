@@ -77,42 +77,70 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                  <p class="lead">Your personal risk factor for Chlamydia is:</p>
-                  <h3>{{the_result}}%</h3>
-                  <p class="lead">The average for your ZIP code ({{zipcode}}) is:</p>
-                  <h3>{{average}}%</h3>
-
-                    <hr class="small">
+                <h1>Chlamydia</h1>
+                  <p class="lead">Your personal risk factor is:</p>
+                  <h2>{{warning}} ({{the_result}}%)</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-8 col-lg-offset-2">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../static/img/portfolio-1.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../static/img/portfolio-2.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../static/img/portfolio-3.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../static/img/portfolio-4.jpg">
+                                    <img class="img-portfolio img-responsive" src="/chlamydiaplot/you/{{yourrate}}/gender/{{genderrate}}/age/{{agerate}}/race/{{racerate}}/location/{{locationrate}}">
                                 </a>
                             </div>
                         </div>
                     </div>
+                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Chlamydia.</p>
+                    <hr class="large">
+
+                </div>
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h1>Syphilis</h1>
+                 <p class="lead">Your personal risk factor is:</p>
+                  <h2>{{warning}} ({{the_result}}%)</h2>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="/syphilisplot">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Syphilis.
+                    <hr class="large">
+
+                </div>
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h1>Gonorrhea</h1>
+                 <p class="lead">Your personal risk factor is:</p>
+                  <h2>{{warning}} ({{the_result}}%)</h2>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="/gonorrheaplot">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Gonorrhea.
+                    <hr class="large">
+                </div>
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h1>HIV</h1>
+                 <p class="lead">Your personal risk factor is:</p>
+                  <h2>{{warning}} ({{the_result}}%)</h2>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="/hivplot">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have HIV.
+
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -162,7 +190,7 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                                <i class="fa fa-line-chart fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>Chlamydia</strong>
@@ -175,7 +203,7 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                                <i class="fa fa-bar-chart fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>Syphilis</strong>
@@ -188,7 +216,7 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                                <i class="fa fa-pie-chart fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>Gonorrhea</strong>
@@ -201,7 +229,7 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                                <i class="fa fa-area-chart fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>HIV</strong>

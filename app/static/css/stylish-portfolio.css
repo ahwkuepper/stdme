@@ -63,6 +63,17 @@ hr.small {
     max-width: 100px;
 }
 
+
+hr.medium {
+    max-width: 500px;
+}
+
+
+hr.large {
+    max-width: 100%;
+}
+
+
 /* Side Menu */
 
 #sidebar-wrapper {
@@ -231,6 +242,7 @@ hr.small {
 
 .img-portfolio {
     margin: 0 auto;
+    padding: 10px;
 }
 
 .img-portfolio:hover {
