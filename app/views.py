@@ -135,12 +135,12 @@ def make_chlamydia_plot(yourrate, genderrate, agerate, racerate, locationrate):
   fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
 
   # Center the data to make it diverging
-  y2 = d - d.mean()
+  y2 = d #- d.mean()
 
   sns.barplot(d_label, y2, palette="RdBu_r", ax=ax)
 
-  ax.set_ylabel('-        Risk        +', fontsize=25)
-  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
+  ax.set_ylabel('Risk', fontsize=25)
+#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
 
   #plt.title(r'Chlamydia', fontsize=25)
 
@@ -167,12 +167,12 @@ def make_syphilis_plot():
   fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
 
   # Center the data to make it diverging
-  y2 = d - d.mean()
+  y2 = d   #- d.mean()
 
   sns.barplot(d_label, y2, palette="RdBu_r", ax=ax)
 
-  ax.set_ylabel('-        Risk        +', fontsize=25)
-  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
+  ax.set_ylabel('Risk', fontsize=25)
+#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
 
  # plt.title(r'Syphilis', fontsize=25)
 
@@ -199,12 +199,12 @@ def make_gonorrhea_plot():
   fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
 
   # Center the data to make it diverging
-  y2 = d - d.mean()
+  y2 = d  # - d.mean()
 
   sns.barplot(d_label, y2, palette="RdBu_r", ax=ax)
 
-  ax.set_ylabel('-        Risk        +', fontsize=25)
-  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
+  ax.set_ylabel('Risk', fontsize=25)
+#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
 
 #  plt.title(r'Gonorrhea', fontsize=25)
 
