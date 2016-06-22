@@ -67,7 +67,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>STD &amp; Me</h1>
-            <h3>Be healthy when you meet interesting people nearby</h3>
+            <h3>Predicting your personal risk of infection</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">About</a>
             <a href="#start" class="btn btn-dark btn-lg">Start</a>
@@ -82,11 +82,13 @@
             </div>
                 <div class="col-lg-10 text-center">
                     <h2>Sexually transmitted diseases (STDs) are on the rise!</h2>
-                    <p class="lead">In the last years the number of reported STD cases has increased at an alarming pace. Since 2006, the number of Syphilis infections is growing by 15% per year, while Chlamydia and Gonorrhea are spreading increasingly since 2012 especially among young people.</p> 
+                    <p class="lead">In the last years the number of reported STD cases has increased at an alarming pace. Chlamydia, Syphilis and Gonorrhea are the three most common diseases that are often unnoticed by the infected persons, but are potentially very dangerous if untreated. Due to this imminent danger, these diseases are reportable to the Center for Disease Control (CDC), which keeps track of infection rates among the US population.</p> 
 
-                    <p class="lead">STD rates vary significantly by gender, age, race/ethnicity and location. By entering your information below you can get your personal STD risk score based on publicly available CDC data on STD prevalences and Census data on population characteristics.</p>
+                    <p class="lead">Since 2006, the number of Syphilis infections has been growing by 15% each year, while Chlamydia and Gonorrhea are spreading increasingly since 2012 especially among young people. The cost for the US healthcare system - as well as for individuals suffering from long-term consequences of untreated STDs - are astronomical. Most of these costs can be easily prevented through STD awareness, safe sex, STD testing - and treatment in the case of an infection.</p> 
 
-                    <p class="lead">Awareness is the first step to prevention, but "to reduce STDs, Americans must take steps to protect themselves. For sexually active individuals, testing and treatment according to CDC's recommendations, using condoms consistently and correctly, and limiting the number of sex partners are all effective strategies for reducing the risk of infection and consequences to health." (Source: <a href="http://www.cdc.gov/nchhstp/newsroom/2015/std-surveillance-report-press-release.html">CDC</a>)</p>
+                    <p class="lead">But what is your own personal risk? Just as population characteristics differ from neighborhood to neighborhood, STD rates vary significantly by gender, age, race/ethnicity and location. STD &amp; Me provides a predictive model that leverages publicly available statistics on STD prevalences from the CDC with Census data on population characteristics to calculate individual risk factors for the three most prevalent STDs listed above. By entering your information below you will get individual scores for each of the three STDs and comparisons of your risk to your gender, your age group, your race/ethnicity and your location.</p>
+
+                    <p class="lead">The scores from STD &amp; Me are not a medical result. They do not replace STD testing, which can only be done by labs through testing sites or, e.g., through your primary care physician. STD &amp; Me is meant to raise awareness of STD risk. Awareness is the first step to prevention, but <i>"to reduce STDs, Americans must take steps to protect themselves. For sexually active individuals, testing and treatment according to CDC's recommendations, using condoms consistently and correctly, and limiting the number of sex partners are all effective strategies for reducing the risk of infection and consequences to health."</i> (Source: <a href="http://www.cdc.gov/nchhstp/newsroom/2015/std-surveillance-report-press-release.html">CDC</a>)</p>
                     <p class="lead">
                 </div>
             </div>
@@ -184,45 +186,42 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Get more information about these common STD's</h2>
+                    <h2>Get more information about these common STDs</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                                <img src="static/img/chlamydia.jpg" alt="Chlamydia" style="width:100px;height:100px;">
                             </span>
                                 <h4>
                                     <strong>Chlamydia</strong>
                                 </h4>
-                                <p>The silent infection. This disease often goes unnoticed since most patients show no symptoms. The consequences are severe, though, and can lead to infertility.</p>
+                                <p>The silent infection. This disease often goes unnoticed since most patients show no symptoms. The consequences are severe, though, and can lead to infertility. In most cases it can be treated with antibiotics.</p>
                                 <a href="https://www.cdc.gov/std/chlamydia/stdfact-chlamydia.htm" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                                <img src="static/img/syphilis.jpg" alt="Syphils" style="width:100px;height:100px;">
                             </span>
                                 <h4>
                                     <strong>Syphilis</strong>
                                 </h4>
-                                <p>This infectious disease has spread massively since the early 2000's, especially among men who have sex with men.</p>
+                                <p>This infectious disease has spread massively since the early 2000's, especially among men who have sex with men. Like Chlamydia, the early stages of Syphilis are often unnoticed. In most cases it can be treated with antibiotics.</p>
                                 <a href="https://www.cdc.gov/std/syphilis/stdfact-syphilis.htm" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                                <img src="static/img/gonorrhea.jpg" alt="Gonorrhea" style="width:100px;height:100px;">
                             </span>
                                 <h4>
                                     <strong>Gonorrhea</strong>
                                 </h4>
-                                <p>Like Chlamydia and Syphilis, this STD is most frequent among young people. It is the second most prevalent of the reportable STDs and is more common in the South of the US.</p>
+                                <p>Like Chlamydia and Syphilis, this STD is most frequent among young people. It is the second most prevalent of the reportable STDs and is more common in the South of the US. In most cases it can be treated with antibiotics.</p>
                                 <a href="https://www.cdc.gov/std/gonorrhea/stdfact-gonorrhea.htm" class="btn btn-light">Learn More</a>
                             </div>
                         </div>

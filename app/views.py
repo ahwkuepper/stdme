@@ -320,14 +320,14 @@ def stdme_output():
 
   target_unnormalized = df_zipcode_unnormalized[df_zipcode_unnormalized["geoid2"]==zipcode]
 
-  TOTALNR = target_unnormalized["Population"]
+  TOTALNR = target_unnormalized["Population"]+1.0
 
   if gender == "Male":
       gender_table = "hd02s026"
   else:
       gender_table = "hd02s051"
 
-  GENDERNR = TOTALNR*target_unnormalized[gender_table]/100.0
+  GENDERNR = TOTALNR*target_unnormalized[gender_table]/100.0+1.0
 
   if race == "White":
       race_table = "hd02s078"
@@ -344,7 +344,7 @@ def stdme_output():
   elif race == "Hispanic":
       race_table = "hd02s107"
 
-  RACENR = TOTALNR*target_unnormalized[race_table]/100.0
+  RACENR = TOTALNR*target_unnormalized[race_table]/100.0+1.0
 
   if age == "0-14":
       age_table = "hd02s002"
@@ -367,7 +367,7 @@ def stdme_output():
   elif age == "65+":
       age_table = "hd02s015"
 
-  AGENR = TOTALNR*target_unnormalized[age_table]/100.0
+  AGENR = TOTALNR*target_unnormalized[age_table]/100.0+1.0
 
 
   zipcoderate = calculate_rate(zipcode)*100
@@ -375,7 +375,7 @@ def stdme_output():
   agerate = age_rate[age]*100
   racerate = race_rate[race]*100
 
-
+  print(zipcoderate, TOTALNR.values, genderrate, GENDERNR.values, racerate, RACENR.values, agerate, AGENR.values)
   the_result = (zipcoderate/TOTALNR.values + genderrate/GENDERNR.values + racerate/RACENR.values + agerate/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
 
   d = np.array([the_result[0], genderrate, agerate, racerate, zipcoderate[0]])
