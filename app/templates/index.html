@@ -31,14 +31,18 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <!-- Custom Fonts -->
     <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 
+
+
   </head>
 
   <body>
+
 
       <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
@@ -82,11 +86,28 @@
             </div>
                 <div class="col-lg-10 text-center">
                     <h2>Sexually transmitted diseases (STDs) are on the rise</h2>
-                    <p class="lead">In recent years the number of reported STD cases has increased at an alarming rate. Chlamydia, Syphilis and Gonorrhea are the three most common diseases. They often go unnoticed by those infected, but can lead to life-long complications if untreated. Due to these serious consequences these "reportable diseases" are monitored by the Center for Disease Control (CDC), which keeps track of infection rates among the US population.</p> 
+                    <br>
+                    <p class="lead">In recent years the number of reported STD cases has increased at an alarming rate. Chlamydia, Syphilis and Gonorrhea are the three most common diseases. Since 2006, the number of new Syphilis cases has grown by 15% annually. Similarly, Chlamydia and Gonorrhea have increasingly spread since 2012 especially among young adults. All three often go unnoticed by those infected, but can lead to life-long complications if untreated - which is why these "reportable diseases" are monitored by the Center for Disease Control (CDC).</p> 
 
-                    <p class="lead">Since 2006, the number of new Syphilis cases has grown by 15% annually. Similarly, Chlamydia and Gonorrhea have increasingly spread since 2012 especially among young adults. The cost for the US healthcare system are of the order of 20 billion USD. Most of these costs can be easily prevented through STD awareness, safe sex, STD testing - and treatment in the case of an infection.</p> 
+                    <p class="lead">The CDC estimates the direct costs for the US healthcare system to be of the order of 20 billion USD. Most of these costs can be prevented through STD awareness, safe sex, STD testing - and treatment in the case of an infection. But what is your own personal risk? Just as population characteristics differ from neighborhood to neighborhood, STD rates vary significantly by gender, age, race/ethnicity and location.</p> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
 
-                    <p class="lead">But what is your own personal risk? Just as population characteristics differ from neighborhood to neighborhood, STD rates vary significantly by gender, age, race/ethnicity and location. STD &amp; Me provides a predictive model that leverages publicly available statistics on STD prevalences from the CDC with Census data on population characteristics to calculate individual risk factors for the three most prevalent STDs listed above. By entering your information below you will get individual scores for each of the three STDs and comparisons of your risk to your gender, your age group, your race/ethnicity and your location.</p>
+    <section id="d3plot" class="container content-section text-center">
+    </section>
+
+    <section id="lower_about" class="about">
+        <div class="container">
+            <div class="row">
+            <div class="col-sm-1">
+            </div>
+                <div class="col-lg-10 text-center">
+
+                    <p class="lead">STD &amp; Me provides a predictive model that leverages publicly available statistics on STD prevalences from the CDC with Census data on population characteristics to calculate individual risk factors for the three most prevalent STDs. By entering your information below you will get individual scores for each of the three STDs and comparisons of your risk to your gender, your age group, your race/ethnicity and your location. The presentation below has more information on the data and the model.</p>
                     <br>
                     <iframe src="https://docs.google.com/presentation/d/17CA3dr7nsDfLVZJsMoSfY_1pe_Zn7Wb4AoKfOOyhLLs/embed?start=false&loop=true&delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
@@ -331,6 +352,10 @@
     </script>
 
 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="../static/js/d3plot.js"></script>
 
 
   </body>

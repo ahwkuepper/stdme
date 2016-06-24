@@ -89,60 +89,42 @@
                             </div>
                         </div>
                     </div>
-                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Chlamydia.</p>
+                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Chlamydia. The national Chlamydia rate is {{national_average}}%.</p>
                     <hr class="large">
-
                 </div>
+
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h1>Gonorrhea</h1>
+                 <p class="lead">Your personal risk factor is:</p>
+                  <h2>{{warning_gonorrhea}} ({{the_result_gonorrhea}}%)</h2>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="/gonorrheaplot/you/{{yourrate_gonorrhea}}/gender/{{genderrate_gonorrhea}}/age/{{agerate_gonorrhea}}/race/{{racerate_gonorrhea}}/location/{{locationrate_gonorrhea}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lead">The average for your neighborhood is {{average_gonorrhea}}%, meaning that 1 in {{nthperson_gonorrhea}} people have Gonorrhea. The national Gonorrhea rate is {{national_average_gonorrhea}}%.
+                    <hr class="large">
+                </div>
+
                <div class="col-lg-10 col-lg-offset-1 text-center">
                 <h1>Syphilis</h1>
                  <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning}} ({{the_result}}%)</h2>
+                  <h2>{{warning_syphilis}} ({{the_result_syphilis}}%)</h2>
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/syphilisplot">
+                                    <img class="img-portfolio img-responsive" src="/syphilisplot/you/{{yourrate_syphilis}}/gender/{{genderrate_syphilis}}/age/{{agerate_syphilis}}/race/{{racerate_syphilis}}/location/{{locationrate_syphilis}}">
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Syphilis.
-                    <hr class="large">
-
+                    <p class="lead">The average for your neighborhood is {{average_syphilis}}%, meaning that 1 in {{nthperson_syphilis}} people have Syphilis. The national Syphilis rate is {{national_average_syphilis}}%.
                 </div>
-                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>Gonorrhea</h1>
-                 <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning}} ({{the_result}}%)</h2>
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/gonorrheaplot">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have Gonorrhea.
-                    <hr class="large">
-                </div>
-<!--                <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>HIV</h1>
-                 <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning}} ({{the_result}}%)</h2>
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/hivplot">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="lead">The average for your neighborhood is {{average}}%, meaning that 1 in {{nthperson}} people have HIV.
-
-                </div> -->
-                <!-- /.col-lg-10 -->
             </div>
             <!-- /.row -->
         </div>
