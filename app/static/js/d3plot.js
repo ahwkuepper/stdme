@@ -4,7 +4,7 @@ var width = 960,
 var rateById = d3.map();
 
 var quantize = d3.scale.quantize()
-    .domain([0, .15])
+    .domain([0, 1000])
     .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
 var projection = d3.geo.albersUsa()
@@ -20,7 +20,7 @@ var svg = d3.select("#d3plot").append("svg")
 
 queue()
     .defer(d3.json, "../static/js/us.json")
-    .defer(d3.tsv, "../static/js/unemployment.tsv", function(d) { rateById.set(d.id, +d.rate); })
+    .defer(d3.tsv, "../static/js/chlamydia.tsv", function(d) { rateById.set(d.id, +d.rate); })
     .await(ready);
 
 function ready(error, us) {
