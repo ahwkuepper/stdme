@@ -6,9 +6,9 @@ import numpy as np
 import pickle
 import seaborn as sns
 import matplotlib.pyplot as plt
-#from sqlalchemy import create_engine
-#from sqlalchemy_utils import database_exists, create_database
-#import psycopg2
+from sqlalchemy import create_engine
+from sqlalchemy_utils import database_exists, create_database
+import psycopg2
 
 exec(open("app/constants.py").read())
 
@@ -32,6 +32,13 @@ Ystd_syphilis = pickle.load(open('/Users/akuepper/Desktop/Insight/project/data/Y
 df_sites = pd.read_csv('/Users/akuepper/Desktop/Insight/project/data/testingsites.csv')
 
 
+dbname = 'census_zipcode_db'
+username = 'akuepper'
+pswd = 'FLP@nd'
+engine = create_engine('postgresql://%s:%s@localhost/%s'%(username,pswd,dbname))
+con = None
+con = psycopg2.connect(database = dbname, user = username, host='localhost', password=pswd)
+
 
 
 def lookup_std_testing_site(Zipcode):
@@ -51,123 +58,40 @@ def lookup_std_testing_site(Zipcode):
 
 
 def calculate_rate(Zipcode):
-    target = df_zipcode[df_zipcode["geoid2"]==Zipcode]
+    sql_query = "SELECT * FROM zip_census_db WHERE geoid2=%i;"%(Zipcode)
+    target = pd.read_sql_query(sql_query,con)
     target_params = target.values[0]
     chlamydia_rate = model.predict(target_params[1:])*Ystd+Ymean
     return chlamydia_rate
 
 def calculate_rate_gonorrhea(Zipcode):
-    target = df_zipcode[df_zipcode["geoid2"]==Zipcode]
+    sql_query = "SELECT * FROM zip_census_db WHERE geoid2=%i;"%(Zipcode)
+    target = pd.read_sql_query(sql_query,con)
     target_params = target.values[0]
     gonorrhea_rate = model_gonorrhea.predict(target_params[1:])*Ystd_gonorrhea+Ymean_gonorrhea
     return gonorrhea_rate
 
 def calculate_rate_syphilis(Zipcode):
-    target = df_zipcode[df_zipcode["geoid2"]==Zipcode]
+    sql_query = "SELECT * FROM zip_census_db WHERE geoid2=%i;"%(Zipcode)
+    target = pd.read_sql_query(sql_query,con)
     target_params = target.values[0]
     syphilis_rate = model_syphilis.predict(target_params[1:])*Ystd_syphilis+Ymean_syphilis
     return syphilis_rate
 
 
-@app.route('/chlamydiaplot/you/<float:yourrate>/gender/<float:genderrate>/age/<float:agerate>/race/<float:racerate>/location/<float:locationrate>')
-def make_chlamydia_plot(yourrate, genderrate, agerate, racerate, locationrate):
-  
+@app.route('/make_plot/you/<float:yourrate>/gender/<float:genderrate>/age/<float:agerate>/race/<float:racerate>/location/<float:locationrate>')
+def make_plot(yourrate, genderrate, agerate, racerate, locationrate):  
   d = np.array([yourrate, genderrate, agerate, racerate, locationrate])
-  print(d)
-
-  #make Chlamydia plot
   fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
-
-  # Center the data to make it diverging
-  y2 = d #- d.mean()
-
-  sns.barplot(d_label, y2, palette="RdBu_r", ax=ax)
-
+  sns.barplot(d_label, d, palette="RdBu_r", ax=ax)
   ax.set_ylabel('Risk', fontsize=25)
-#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
-
-  #plt.title(r'Chlamydia', fontsize=25)
-
-  # Finalize the plot
   sns.despine(bottom=True)
   plt.setp(fig.axes, yticks=[])
   plt.tight_layout(h_pad=3)
-
   img = BytesIO()
   fig.savefig(img)
   img.seek(0)
-#  plt.savefig('/Users/akuepper/Desktop/Insight/project/app/static/img/chlamydia.png', bbox_inches='tight', dpi=150)
   return send_file(img, mimetype='image/png')
-#  return base64.b64encode(img.getvalue())
-
-
-@app.route('/gonorrheaplot/you/<float:yourrate_gonorrhea>/gender/<float:genderrate_gonorrhea>/age/<float:agerate_gonorrhea>/race/<float:racerate_gonorrhea>/location/<float:locationrate_gonorrhea>')
-def make_gonorrhea_plot(yourrate_gonorrhea, genderrate_gonorrhea, agerate_gonorrhea, racerate_gonorrhea, locationrate_gonorrhea):
-  
-  d_gonorrhea = np.array([yourrate_gonorrhea, genderrate_gonorrhea, agerate_gonorrhea, racerate_gonorrhea, locationrate_gonorrhea])
- 
-  print(d_gonorrhea)
-
-  #make Gonorrhea plot
-  fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
-
-  # Center the data to make it diverging
-  y2_gonorrhea = d_gonorrhea  # - d.mean()
-
-  sns.barplot(d_label, y2_gonorrhea, palette="RdBu_r", ax=ax)
-
-  ax.set_ylabel('Risk', fontsize=25)
-#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
-
-#  plt.title(r'Gonorrhea', fontsize=25)
-
-  # Finalize the plot
-  sns.despine(bottom=True)
-  plt.setp(fig.axes, yticks=[])
-  plt.tight_layout(h_pad=3)
-
-  img = BytesIO()
-  fig.savefig(img)
-  img.seek(0)
-#  plt.savefig('/Users/akuepper/Desktop/Insight/project/app/static/img/chlamydia.png', bbox_inches='tight', dpi=150)
-  return send_file(img, mimetype='image/png')
-#  return base64.b64encode(img.getvalue())
-
-
-@app.route('/syphilisplot/you/<float:yourrate_syphilis>/gender/<float:genderrate_syphilis>/age/<float:agerate_syphilis>/race/<float:racerate_syphilis>/location/<float:locationrate_syphilis>')
-def make_syphilis_plot(yourrate_syphilis, genderrate_syphilis, agerate_syphilis, racerate_syphilis, locationrate_syphilis):
-  
-  d_syphilis = np.array([yourrate_syphilis, genderrate_syphilis, agerate_syphilis, racerate_syphilis, locationrate_syphilis])
-
-  print(d_syphilis)
-
-  #make Syphilis plot
-  fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
-
-  # Center the data to make it diverging
-  y2_syphilis = d_syphilis   #- d.mean()
-
-  sns.barplot(d_label, y2_syphilis, palette="RdBu_r", ax=ax)
-
-  ax.set_ylabel('Risk', fontsize=25)
-#  ax.plot([-1, len(d)], [0,0], "k-", linewidth=1.0)
-
- # plt.title(r'Syphilis', fontsize=25)
-
-  # Finalize the plot
-  sns.despine(bottom=True)
-  plt.setp(fig.axes, yticks=[])
-  plt.tight_layout(h_pad=3)
-
-  img = BytesIO()
-  fig.savefig(img)
-  img.seek(0)
-#  plt.savefig('/Users/akuepper/Desktop/Insight/project/app/static/img/chlamydia.png', bbox_inches='tight', dpi=150)
-  return send_file(img, mimetype='image/png')
-#  return base64.b64encode(img.getvalue())
-
-
-
 
 
 @app.route('/')
@@ -176,32 +100,6 @@ def index():
     return render_template("index.html")
 
 
-#@app.route('/db')
-#def birth_page():
-#    sql_query = """                                                             
-#                SELECT * FROM birth_data_table WHERE delivery_method='Cesarean'\
-#;                                                                               
-#                """
-#    query_results = pd.read_sql_query(sql_query,con)
-#    births = ""
-#    print(query_results[:10])
-#    for i in range(0,10):
-#        births += query_results.iloc[i]['birth_month']
-#        births += "<br>"
-#    return births
-
-
-#@app.route('/db_fancy')
-#def cesareans_page_fancy():
-#    sql_query = """
-#               SELECT index, attendant, birth_month FROM birth_data_table WHERE delivery_method='Cesarean';
-#                """
-#    query_results=pd.read_sql_query(sql_query,con)
-#    births = []
- #   for i in range(0,query_results.shape[0]):
-#        births.append(dict(index=query_results.iloc[i]['index'], attendant=query_results.iloc[i]['attendant'], birth_month=query_results.iloc[i]['birth_month']))
-#    return render_template('cesareans.html',births=births)
-#
 
 @app.route('/output')
 def stdme_output():
@@ -234,7 +132,10 @@ def stdme_output():
   else:
     age = "0-14"
 
-  target_unnormalized = df_zipcode_unnormalized[df_zipcode_unnormalized["geoid2"]==zipcode]
+# get entry from SQL database
+  sql_query = "SELECT * FROM zip_census_unnormalized_db WHERE geoid2=%i;"%(zipcode)
+  target_unnormalized = pd.read_sql_query(sql_query,con)
+
 
   TOTALNR = target_unnormalized["Population"]+1.0
 

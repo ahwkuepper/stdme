@@ -35,12 +35,11 @@
     <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-
   </head>
 
   <body>
 
-      <!-- Navigation -->
+    <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -63,28 +62,26 @@
         </ul>
     </nav>
 
-
-<!-- Input Section -->
-      <!-- Callout -->
-      <aside id="top" class="resultspage">
-          <div class="text-vertical-center">
-              <h1>Your results</h1>
-          </div>
-      </aside>
+    <!-- Callout -->
+    <aside id="top" class="resultspage">
+        <div class="text-vertical-center">
+            <h1>Your results</h1>
+        </div>
+    </aside>
 
     <!-- Portfolio -->
     <section id="results" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>Chlamydia</h1>
-                  <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning}} ({{the_result}}%)</h2>
+                    <h1>Chlamydia</h1>
+                    <p class="lead">Your personal risk factor is:</p>
+                    <h2>{{warning}} ({{the_result}}%)</h2>
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/chlamydiaplot/you/{{yourrate}}/gender/{{genderrate}}/age/{{agerate}}/race/{{racerate}}/location/{{locationrate}}">
+                                    <img class="img-portfolio img-responsive" src="/make_plot/you/{{yourrate}}/gender/{{genderrate}}/age/{{agerate}}/race/{{racerate}}/location/{{locationrate}}">
                                 </a>
                             </div>
                         </div>
@@ -94,14 +91,14 @@
                 </div>
 
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>Gonorrhea</h1>
-                 <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning_gonorrhea}} ({{the_result_gonorrhea}}%)</h2>
+                    <h1>Gonorrhea</h1>
+                    <p class="lead">Your personal risk factor is:</p>
+                    <h2>{{warning_gonorrhea}} ({{the_result_gonorrhea}}%)</h2>
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/gonorrheaplot/you/{{yourrate_gonorrhea}}/gender/{{genderrate_gonorrhea}}/age/{{agerate_gonorrhea}}/race/{{racerate_gonorrhea}}/location/{{locationrate_gonorrhea}}">
+                                    <img class="img-portfolio img-responsive" src="/make_plot/you/{{yourrate_gonorrhea}}/gender/{{genderrate_gonorrhea}}/age/{{agerate_gonorrhea}}/race/{{racerate_gonorrhea}}/location/{{locationrate_gonorrhea}}">
                                 </a>
                             </div>
                         </div>
@@ -110,15 +107,15 @@
                     <hr class="large">
                 </div>
 
-               <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>Syphilis</h1>
-                 <p class="lead">Your personal risk factor is:</p>
-                  <h2>{{warning_syphilis}} ({{the_result_syphilis}}%)</h2>
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h1>Syphilis</h1>
+                    <p class="lead">Your personal risk factor is:</p>
+                    <h2>{{warning_syphilis}} ({{the_result_syphilis}}%)</h2>
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/syphilisplot/you/{{yourrate_syphilis}}/gender/{{genderrate_syphilis}}/age/{{agerate_syphilis}}/race/{{racerate_syphilis}}/location/{{locationrate_syphilis}}">
+                                    <img class="img-portfolio img-responsive" src="/make_plot/you/{{yourrate_syphilis}}/gender/{{genderrate_syphilis}}/age/{{agerate_syphilis}}/race/{{racerate_syphilis}}/location/{{locationrate_syphilis}}">
                                 </a>
                             </div>
                         </div>
@@ -148,19 +145,18 @@
     </section>
 
     <!-- Map -->
-          <aside class="testingsites">
-          <div class="text-vertical-center">
-              <h1>Free STD testing near you</h1>
-          </div>
-      </aside>
+    <aside class="testingsites">
+        <div class="text-vertical-center">
+            <h1>Free STD testing near you</h1>
+        </div>
+    </aside>
 
-  <div class="overlay" onClick="style.pointerEvents='none'"></div>
+    <div class="overlay" onClick="style.pointerEvents='none'"></div>
     <section id="testingsites" class="map">
         <iframe width="100%" height="100%" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwBjf9x0xmeNniiIxrPsmCtbw_u6MpwaU&q={{sentence}}+{{zipcode}}"></iframe>
     </section>
 
-       <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <!-- Services -->
     <section id="information" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
@@ -204,19 +200,6 @@
                                 <a href="https://www.cdc.gov/std/syphilis/stdfact-syphilis.htm" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
-<!--                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>HIV</strong>
-                                </h4>
-                                <p>Still really bad.</p>
-                                <a href="https://www.cdc.gov/std/hiv/stdfact-std-hiv.htm" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>  -->
                     </div>
                     <!-- /.row (nested) -->
                 </div>
