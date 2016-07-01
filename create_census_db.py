@@ -4,7 +4,7 @@ import psycopg2
 import pandas as pd
 
 #DB properties and account information
-dbname = 'census_zipcode_db'
+dbname = 'small_census_zipcode_db'
 username = 'XXX'
 pswd = 'XXX'
 engine = create_engine('postgresql://%s:%s@localhost/%s'%(username,pswd,dbname))
@@ -29,6 +29,10 @@ zipcensus_unnormalized.to_sql('zip_census_unnormalized_db', engine, if_exists='r
 #test
 
 # query:
+
+con = None
+con = psycopg2.connect(database = dbname, user = username, host='localhost', password=pswd)
+
 sql_query = """
 SELECT * FROM zip_census_unnormalized_db WHERE geoid2='602';
 """

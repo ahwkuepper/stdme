@@ -32,7 +32,7 @@ Ystd_syphilis = pickle.load(open('/Users/akuepper/Desktop/Insight/project/data/Y
 df_sites = pd.read_csv('/Users/akuepper/Desktop/Insight/project/data/testingsites.csv')
 
 
-dbname = 'census_zipcode_db'
+dbname = 'small_census_zipcode_db'
 username = 'akuepper'
 pswd = 'FLP@nd'
 engine = create_engine('postgresql://%s:%s@localhost/%s'%(username,pswd,dbname))
@@ -185,7 +185,6 @@ def stdme_output():
       age_table = "hd02s015"
 
   AGENR = TOTALNR*target_unnormalized[age_table]/100.0+1.0
-
 
   zipcoderate = calculate_rate(zipcode)*100
   genderrate = gender_rate[gender]*100
