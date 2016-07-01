@@ -79,11 +79,12 @@ def calculate_rate_syphilis(Zipcode):
     return syphilis_rate
 
 
-@app.route('/make_plot/you/<float:yourrate>/gender/<float:genderrate>/age/<float:agerate>/race/<float:racerate>/location/<float:locationrate>')
-def make_plot(yourrate, genderrate, agerate, racerate, locationrate):  
+@app.route('/make_plot/you/<float:yourrate>/gender/<float:genderrate>/age/<float:agerate>/race/<float:racerate>/location/<float:locationrate>/national/<float:nationalrate>')
+def make_plot(yourrate, genderrate, agerate, racerate, locationrate, nationalrate):  
   d = np.array([yourrate, genderrate, agerate, racerate, locationrate])
   fig, ax = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
   sns.barplot(d_label, d, palette="RdBu_r", ax=ax)
+  ax.axhline(nationalrate, alpha=0.5, color='black', ls='dotted')
   ax.set_ylabel('Risk', fontsize=25)
   sns.despine(bottom=True)
   plt.setp(fig.axes, yticks=[])
