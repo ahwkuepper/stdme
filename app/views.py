@@ -141,11 +141,13 @@ def stdme_output():
   TOTALNR = target_unnormalized["Population"]+1.0
 
   if gender == "Male":
-      gender_table = "hd02s026"
+  	gender_table = "hd02s026"
+  	GENDERNR = TOTALNR*target_unnormalized[gender_table]/100.0+1.0
   else:
-      gender_table = "hd02s051"
+  	gender_table = "hd02s026"
+  	GENDERNR = TOTALNR*(100.0-target_unnormalized[gender_table])/100.0+1.0
+#     gender_table = "hd02s051"
 
-  GENDERNR = TOTALNR*target_unnormalized[gender_table]/100.0+1.0
 
   if race == "White":
       race_table = "hd02s078"
