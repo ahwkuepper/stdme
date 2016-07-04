@@ -146,7 +146,6 @@ def stdme_output():
   else:
   	gender_table = "hd02s026"
   	GENDERNR = TOTALNR*(100.0-target_unnormalized[gender_table])/100.0+1.0
-#     gender_table = "hd02s051"
 
 
   if race == "White":
@@ -209,9 +208,79 @@ def stdme_output():
   print("Gonorrhea: ", zipcoderate_gonorrhea, TOTALNR.values, genderrate_gonorrhea, GENDERNR.values, racerate_gonorrhea, RACENR.values, agerate_gonorrhea, AGENR.values)
   print("Syphilis: ", zipcoderate_syphilis, TOTALNR.values, genderrate_syphilis, GENDERNR.values, racerate_syphilis, RACENR.values, agerate_syphilis, AGENR.values)
 
-  the_result = (zipcoderate/TOTALNR.values + genderrate/GENDERNR.values + racerate/RACENR.values + agerate/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
-  the_result_gonorrhea = (zipcoderate_gonorrhea/TOTALNR.values + genderrate_gonorrhea/GENDERNR.values + racerate_gonorrhea/RACENR.values + agerate_gonorrhea/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
-  the_result_syphilis = (zipcoderate_syphilis/TOTALNR.values + genderrate_syphilis/GENDERNR.values + racerate_syphilis/RACENR.values + agerate_syphilis/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
+  chlamydiacases = zipcoderate*TOTALNR.values
+  yourfactor = gender_factor[gender]+age_factor[age]+race_factor[race]
+  the_result = yourfactor*chlamydiacases/(gender_factor["Male"]*TOTALNR*target_unnormalized["hd02s026"]/100.0
+    +gender_factor["Female"]*TOTALNR*(100.0-target_unnormalized[gender_table])/100.0
+    +race_factor["White"]*TOTALNR*target_unnormalized["hd02s078"]/100.0
+    +race_factor["Black"]*TOTALNR*target_unnormalized["hd02s079"]/100.0
+    +race_factor["Native"]*TOTALNR*target_unnormalized["hd02s080"]/100.0
+    +race_factor["Asian"]*TOTALNR*target_unnormalized["hd02s081"]/100.0
+    +race_factor["Pacific"]*TOTALNR*target_unnormalized["hd02s089"]/100.0
+    +race_factor["Multiple"]*TOTALNR*target_unnormalized["hd02s095"]/100.0
+    +race_factor["Hispanic"]*TOTALNR*target_unnormalized["hd02s107"]/100.0
+    +age_factor["0-14"]*TOTALNR*target_unnormalized["hd02s002"]/100.0
+    +age_factor["15-19"]*TOTALNR*target_unnormalized["hd02s005"]/100.0
+    +age_factor["20-24"]*TOTALNR*target_unnormalized["hd02s006"]/100.0
+    +age_factor["25-29"]*TOTALNR*target_unnormalized["hd02s007"]/100.0
+    +age_factor["30-34"]*TOTALNR*target_unnormalized["hd02s008"]/100.0
+    +age_factor["35-39"]*TOTALNR*target_unnormalized["hd02s009"]/100.0
+    +age_factor["40-44"]*TOTALNR*target_unnormalized["hd02s010"]/100.0
+    +age_factor["45-54"]*TOTALNR*target_unnormalized["hd02s011"]/100.0
+    +age_factor["55-64"]*TOTALNR*target_unnormalized["hd02s013"]/100.0
+    +age_factor["65+"]*TOTALNR*target_unnormalized["hd02s015"]/100.0
+    )
+
+  gonorrheacases = zipcoderate_gonorrhea*TOTALNR.values
+  yourfactor_gonorrhea = gender_factor_gonorrhea[gender]+age_factor_gonorrhea[age]+race_factor_gonorrhea[race]
+  the_result_gonorrhea = yourfactor_gonorrhea*gonorrheacases/(gender_factor_gonorrhea["Male"]*TOTALNR*target_unnormalized["hd02s026"]/100.0
+    +gender_factor_gonorrhea["Female"]*TOTALNR*(100.0-target_unnormalized[gender_table])/100.0
+    +race_factor_gonorrhea["White"]*TOTALNR*target_unnormalized["hd02s078"]/100.0
+    +race_factor_gonorrhea["Black"]*TOTALNR*target_unnormalized["hd02s079"]/100.0
+    +race_factor_gonorrhea["Native"]*TOTALNR*target_unnormalized["hd02s080"]/100.0
+    +race_factor_gonorrhea["Asian"]*TOTALNR*target_unnormalized["hd02s081"]/100.0
+    +race_factor_gonorrhea["Pacific"]*TOTALNR*target_unnormalized["hd02s089"]/100.0
+    +race_factor_gonorrhea["Multiple"]*TOTALNR*target_unnormalized["hd02s095"]/100.0
+    +race_factor_gonorrhea["Hispanic"]*TOTALNR*target_unnormalized["hd02s107"]/100.0
+    +age_factor_gonorrhea["0-14"]*TOTALNR*target_unnormalized["hd02s002"]/100.0
+    +age_factor_gonorrhea["15-19"]*TOTALNR*target_unnormalized["hd02s005"]/100.0
+    +age_factor_gonorrhea["20-24"]*TOTALNR*target_unnormalized["hd02s006"]/100.0
+    +age_factor_gonorrhea["25-29"]*TOTALNR*target_unnormalized["hd02s007"]/100.0
+    +age_factor_gonorrhea["30-34"]*TOTALNR*target_unnormalized["hd02s008"]/100.0
+    +age_factor_gonorrhea["35-39"]*TOTALNR*target_unnormalized["hd02s009"]/100.0
+    +age_factor_gonorrhea["40-44"]*TOTALNR*target_unnormalized["hd02s010"]/100.0
+    +age_factor_gonorrhea["45-54"]*TOTALNR*target_unnormalized["hd02s011"]/100.0
+    +age_factor_gonorrhea["55-64"]*TOTALNR*target_unnormalized["hd02s013"]/100.0
+    +age_factor_gonorrhea["65+"]*TOTALNR*target_unnormalized["hd02s015"]/100.0
+    )
+
+  syphiliscases = zipcoderate_syphilis*TOTALNR.values
+  yourfactor_syphilis = gender_factor_syphilis[gender]+age_factor_syphilis[age]+race_factor_syphilis[race]
+  the_result_syphilis = yourfactor_syphilis*syphiliscases/(gender_factor_syphilis["Male"]*TOTALNR*target_unnormalized["hd02s026"]/100.0
+    +gender_factor_syphilis["Female"]*TOTALNR*(100.0-target_unnormalized[gender_table])/100.0
+    +race_factor_syphilis["White"]*TOTALNR*target_unnormalized["hd02s078"]/100.0
+    +race_factor_syphilis["Black"]*TOTALNR*target_unnormalized["hd02s079"]/100.0
+    +race_factor_syphilis["Native"]*TOTALNR*target_unnormalized["hd02s080"]/100.0
+    +race_factor_syphilis["Asian"]*TOTALNR*target_unnormalized["hd02s081"]/100.0
+    +race_factor_syphilis["Pacific"]*TOTALNR*target_unnormalized["hd02s089"]/100.0
+    +race_factor_syphilis["Multiple"]*TOTALNR*target_unnormalized["hd02s095"]/100.0
+    +race_factor_syphilis["Hispanic"]*TOTALNR*target_unnormalized["hd02s107"]/100.0
+    +age_factor_syphilis["0-14"]*TOTALNR*target_unnormalized["hd02s002"]/100.0
+    +age_factor_syphilis["15-19"]*TOTALNR*target_unnormalized["hd02s005"]/100.0
+    +age_factor_syphilis["20-24"]*TOTALNR*target_unnormalized["hd02s006"]/100.0
+    +age_factor_syphilis["25-29"]*TOTALNR*target_unnormalized["hd02s007"]/100.0
+    +age_factor_syphilis["30-34"]*TOTALNR*target_unnormalized["hd02s008"]/100.0
+    +age_factor_syphilis["35-39"]*TOTALNR*target_unnormalized["hd02s009"]/100.0
+    +age_factor_syphilis["40-44"]*TOTALNR*target_unnormalized["hd02s010"]/100.0
+    +age_factor_syphilis["45-54"]*TOTALNR*target_unnormalized["hd02s011"]/100.0
+    +age_factor_syphilis["55-64"]*TOTALNR*target_unnormalized["hd02s013"]/100.0
+    +age_factor_syphilis["65+"]*TOTALNR*target_unnormalized["hd02s015"]/100.0
+    )
+
+
+#  the_result = (zipcoderate/TOTALNR.values + genderrate/GENDERNR.values + racerate/RACENR.values + agerate/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
+#  the_result_gonorrhea = (zipcoderate_gonorrhea/TOTALNR.values + genderrate_gonorrhea/GENDERNR.values + racerate_gonorrhea/RACENR.values + agerate_gonorrhea/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
+#  the_result_syphilis = (zipcoderate_syphilis/TOTALNR.values + genderrate_syphilis/GENDERNR.values + racerate_syphilis/RACENR.values + agerate_syphilis/AGENR.values)/(1.0/TOTALNR.values+1.0/GENDERNR.values+1.0/RACENR.values+1.0/AGENR.values)
 
   d = np.array([the_result[0], genderrate, agerate, racerate, zipcoderate[0]])
   d_gonorrhea = np.array([the_result_gonorrhea[0], genderrate_gonorrhea, agerate_gonorrhea, racerate_gonorrhea, zipcoderate_gonorrhea[0]])
@@ -219,7 +288,9 @@ def stdme_output():
   
   sentence = lookup_std_testing_site(zipcode)
 
-  if d[0]/(100*rate_average) > 3.0:
+  if d[0]/(100*rate_average) > 4.0:
+    warning = "EXTREMELY HIGH"
+  elif d[0]/(100*rate_average) > 3.0:
     warning = "VERY HIGH"
   elif d[0]/(100*rate_average) > 2.0:
     warning = "Very high"
@@ -231,7 +302,9 @@ def stdme_output():
   nthperson = int(100.0/d[4])
 
 
-  if d_gonorrhea[0]/(100*rate_average_gonorrhea) > 3.0:
+  if d_gonorrhea[0]/(100*rate_average_gonorrhea) > 4.0:
+    warning_gonorrhea = "EXTREMELY HIGH"
+  elif d_gonorrhea[0]/(100*rate_average_gonorrhea) > 3.0:
     warning_gonorrhea = "VERY HIGH"
   elif d_gonorrhea[0]/(100*rate_average_gonorrhea) > 2.0:
     warning_gonorrhea = "Very high"
@@ -243,7 +316,9 @@ def stdme_output():
   nthperson_gonorrhea = int(100.0/d_gonorrhea[4])
 
 
-  if d_syphilis[0]/(100*rate_average_syphilis) > 3.0:
+  if d_syphilis[0]/(100*rate_average_syphilis) > 4.0:
+    warning_syphilis = "EXTREMELY HIGH"
+  elif d_syphilis[0]/(100*rate_average_syphilis) > 3.0:
     warning_syphilis = "VERY HIGH"
   elif d_syphilis[0]/(100*rate_average_syphilis) > 2.0:
     warning_syphilis = "Very high"

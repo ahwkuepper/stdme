@@ -1,4 +1,4 @@
-
+#labels for summary plots
 d_label = np.array(["You", "Your gender", "Your age group", "Your race / ethnicity", "Your location"])
 
 #US statistics
@@ -32,7 +32,7 @@ age_number["65+"] = 44704074.0
 
 
 
-#Chlamydia
+#Chlamydia statistics
 gender_rate = {}
 gender_factor = {}
 
@@ -90,7 +90,7 @@ age_factor["55-64"] = age_rate["55-64"]/rate_average
 age_factor["65+"] = age_rate["65+"]/rate_average
 
 
-#Gonorrhea
+#Gonorrhea statistics
 gender_rate_gonorrhea = {}
 gender_factor_gonorrhea = {}
 
@@ -148,7 +148,7 @@ age_factor_gonorrhea["55-64"] = age_rate_gonorrhea["55-64"]/rate_average_gonorrh
 age_factor_gonorrhea["65+"] = age_rate_gonorrhea["65+"]/rate_average_gonorrhea
 
 
-#Syphilis
+#Syphilis statistics
 gender_rate_syphilis = {}
 gender_factor_syphilis = {}
 
