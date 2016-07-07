@@ -4,5 +4,7 @@ graphics
 .ipynb_checkpoints
 .DS_Store
 *xlsx
+*.xls
 *.pyc
 *.pem
+*.pdf

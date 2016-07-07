@@ -1,3 +1,5 @@
+import numpy as np
+
 #labels for summary plots
 d_label = np.array(["You", "Your gender", "Your age group", "Your race / ethnicity", "Your location"])
 
@@ -39,7 +41,9 @@ gender_factor = {}
 gender_rate["Male"] = 278.4e-5
 gender_rate["Female"] = 627.2e-5
 
-rate_average = (gender_rate["Male"]*gender_number["Male"]+gender_rate["Female"]*gender_number["Male"])/(gender_number["Male"]+gender_number["Female"])
+rate_average = ((gender_rate["Male"]*gender_number["Male"]
+	            +gender_rate["Female"]*gender_number["Male"])
+				/(gender_number["Male"]+gender_number["Female"]))
 
 gender_factor["Male"] = gender_rate["Male"]/rate_average
 gender_factor["Female"] = gender_rate["Female"]/rate_average
@@ -97,7 +101,9 @@ gender_factor_gonorrhea = {}
 gender_rate_gonorrhea["Male"] = 120.1e-5
 gender_rate_gonorrhea["Female"] = 101.3e-5
 
-rate_average_gonorrhea = (gender_rate_gonorrhea["Male"]*gender_number["Male"]+gender_rate_gonorrhea["Female"]*gender_number["Male"])/(gender_number["Male"]+gender_number["Female"])
+rate_average_gonorrhea = ((gender_rate_gonorrhea["Male"]*gender_number["Male"]
+	                      +gender_rate_gonorrhea["Female"]*gender_number["Male"])
+						  /(gender_number["Male"]+gender_number["Female"]))
 
 gender_factor_gonorrhea["Male"] = gender_rate_gonorrhea["Male"]/rate_average
 gender_factor_gonorrhea["Female"] = gender_rate_gonorrhea["Female"]/rate_average
@@ -155,7 +161,9 @@ gender_factor_syphilis = {}
 gender_rate_syphilis["Male"] = 11.7e-5
 gender_rate_syphilis["Female"] = 1.1e-5
 
-rate_average_syphilis = (gender_rate_syphilis["Male"]*gender_number["Male"]+gender_rate_syphilis["Female"]*gender_number["Male"])/(gender_number["Male"]+gender_number["Female"])
+rate_average_syphilis = ((gender_rate_syphilis["Male"]*gender_number["Male"]
+	                     +gender_rate_syphilis["Female"]*gender_number["Male"])
+						 /(gender_number["Male"]+gender_number["Female"]))
 
 gender_factor_syphilis["Male"] = gender_rate_syphilis["Male"]/rate_average
 gender_factor_syphilis["Female"] = gender_rate_syphilis["Female"]/rate_average
