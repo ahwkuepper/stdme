@@ -96,6 +96,7 @@ def make_plot(yourrate, genderrate, agerate, racerate, locationrate, nationalrat
   plt.tight_layout(h_pad=3)
   img = BytesIO()
   fig.savefig(img)
+  plt.close()
   img.seek(0)
   return send_file(img, mimetype='image/png')
 
